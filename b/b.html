@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>实验b</title>
+<script src="jquery1.0.0.1.js"></script>
+<script src="js.js"></script>
+<script src="animate.js"></script>
+
+<link rel="stylesheet" href="jquery.mobile-1.4.0.min.css" />
+<script src="jquery-1.9.1.min.js"></script>
+<script src="jquery.mobile-1.4.0.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=0.3">
+
+<style type="text/css">
+	.back{
+		background-color:#FCF;
+	}
+
+	.shipinbox{
+		margin-top:10px;
+		margin-left:22%;
+	}
+	.shipin{
+		border:2px solid #96F;
+		border-radius:25px
+	}
+	.gequ{
+		margin-top:30px;
+		margin-left:40%;
+	}
+	.song{
+		border:2px solid #96F;
+	}
+	.wrap{
+		width:1200px;
+		margin:10px auto;
+	}
+	.slide {
+		height:500px;
+		position: relative;
+	}
+	.slide li{
+		position: absolute;
+		left:200px;
+		top:0;
+	}
+	.slide li img{
+		width:100%;
+	}
+	.arrow{
+		opacity: 0;
+	}
+	.prev,.next{
+		width:76px;
+		height:112px;
+		position: absolute;
+		top:50%;
+		margin-top:-56px;
+		background: url(image/prev.png) no-repeat;
+		z-index: 99;
+	}
+	.next{
+		right:0;
+		background-image: url(image/next.png);
+	}
+	*{margin:0;padding:0}
+	body,button,input,select,textarea{
+		font:12px/1.5 "Microsoft YaHei","微软雅黑",SimSun,"宋体",sans-serif;color:#666;
+	}
+	ol,ul{
+		list-style:none;
+	}
+	a{
+		text-decoration:none;
+	}
+	fieldset,img{
+		border:0;vertical-align:top;
+	};
+	a,input,button,select,textarea{
+		outline:none;
+	}
+	a,button{
+		cursor:pointer;
+	}
+	
+	.box{
+        width:540px;
+        height:360px;
+        margin:100px;
+        border:1px solid #ccc;
+        position:relative;
+    }
+	.big{
+        width:400px;
+        height:400px;
+        position:absolute;
+        top:0;
+        left:570px;
+        border:1px solid #ccc;
+        overflow:hidden;
+        display:none;
+    }
+    .mask {
+        width:175px;
+        height:175px;
+        background:rgba(255, 255, 0, 0.4);
+        position:absolute;
+        top:0;
+        left:0;
+        cursor:move;
+        display:none;
+    }
+    .small{
+        position:relative;
+    }
+    img{
+        vertical-align:top;
+    }
+	a p{
+		font-size:20px;
+	}
+	
+</style>
+<script>
+	function f1() {
+	//window.onload = function () {
+
+		var box = document.getElementsByClassName("box")[0];
+        var small = box.firstElementChild || box.firstChild;
+        var big = box.children[1];
+        var mask = small.children[1];
+        var bigImg = big.children[0];
+        small.onmouseenter = function () {
+			show(mask);
+            show(big);
+        }
+        small.onmouseleave = function () {
+            hide(mask);
+            hide(big);
+        }
+		small.onmousemove = function (event) {
+        	event = event || window.event;
+            var pagex = event.pageX || scroll().left + event.clientX;
+            var pagey = event.pageY || scroll().top + event.clientY;
+            var x = pagex - box.offsetLeft - mask.offsetWidth/2;
+            var y = pagey - box.offsetTop - mask.offsetHeight/2;
+            if(x<0){
+            	x = 0;
+            }
+            if(x>small.offsetWidth-mask.offsetWidth){
+                x = small.offsetWidth-mask.offsetWidth;
+            }
+            if(y<0){
+                y = 0;
+            }
+            if(y>small.offsetHeight-mask.offsetHeight){
+                y = small.offsetHeight-mask.offsetHeight;
+            }
+            console.log(small.offsetHeight);
+            mask.style.left = x + "px";
+            mask.style.top = y + "px";
+
+            var bili = (bigImg.offsetWidth-big.offsetWidth)/(small.offsetWidth-mask.offsetWidth);
+
+            var bili = bigImg.offsetWidth/small.offsetWidth;
+
+            var xx = bili*x;
+            var yy = bili*y;
+
+			bigImg.style.marginTop = -yy+"px";
+			bigImg.style.marginLeft = -xx+"px";
+		}
+	}
+</script>
+</head>
+
+<body>
+<div class="back">
+<div data-role="header" data-position="fixed">
+	<h1>实验b</h1>
+</div>
+
+<div data-role="content">
+
+    <div class="shipinbox">
+        <video src="video/chiai.mp4" class="shipin" controls></video>
+    </div>
+    
+    <div class="gequ">
+        <audio src="music/song.mp3" class="song" controls></audio>
+    </div>
+    
+    <div class="box">
+        <div class="small">
+            <img src="image/small.png"/>
+            <div class="mask"></div>       
+            <button onclick="f1()"><img src="image/fdj.png" width="28" height="27"/></button>
+        </div>
+        <div class="big">
+            <img src="image/big.png"/>
+        </div>
+    </div>
+    
+    <div class="wrap" id="wrap">
+        <div class="slide" id="slide">
+            <ul>
+                <!--五张图片-->
+                <li><a href=""><img src="image/s1.jpg" alt="#"/></a></li>
+                <li><a href=""><img src="image/s2.jpg" alt="#"/></a></li>
+                <li><a href=""><img src="image/s3.png" alt="#"/></a></li>
+                <li><a href=""><img src="image/s4.jpg" alt="#"/></a></li>
+                <li><a href=""><img src="image/s5.png" alt="#"/></a></li>
+            </ul>
+            <!--左右切换按钮-->
+            <div class="arrow" id="arrow">
+                <a href="javascript:;" class="prev"></a>
+                <a href="javascript:;" class="next"></a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<br />
+<a href="b2.html"><p>&nbsp;&nbsp;&nbsp;&nbsp;下一页</p></a>
+<br /><br />
+
+<div data-role="footer">
+    <h6>广东工业大学</h6>
+</div>
+
+</div>
+</body>
+</html>
