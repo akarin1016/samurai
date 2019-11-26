@@ -85,32 +85,10 @@
         .all ol li.current{ 
 			background:yellow;
 		}
-		
-		.book {
-            height: 200px;
-			width:1000px;
-			margin:0 auto;
-        }
-        .bookname {
-            height: 200px;
-            width: 400px;
-            float: left;
-            background-color:#E9E9E9;
-        }
-        .bookname li{
-            list-style: none;
-            height: 20px;
-            margin-left: 10px;
-            margin-top: 7px;
-         }
-        .bookname li a {
-            color: black;
-			text-decoration: none;
-        }
         .bookcontent {
-            height: 200px;
-            width: 600px;
-            margin-left: 400px;
+            height: 100px;
+            width:1000px;
+            margin:0 auto;
             background-color:#9CF;
             color: white;
             font-size:20px;
@@ -119,6 +97,7 @@
             padding-top:10px;
 			padding-left:5px;
 			padding-right:5px;
+			font-size:17px;
         }
 		.x{
 			float:right;
@@ -134,7 +113,103 @@
 			color:#FF0;
 			padding-top:10px;
 		}
-</style>
+		
+		.news{
+			width: 980px;
+			margin:15px auto;
+			
+		}
+
+		.products,.newslist{
+			float: left;
+		}
+		.news-pub{
+			margin-top: 13px;
+			margin-left: 6px;
+			color:#7AB800;
+		}
+		.news-pub img{
+			vertical-align: middle;
+		}
+		.clearfix:after{
+			content:".";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+			clear: both;
+		}
+		.clearfix{
+			zoom:1;
+		}
+		/*左边盒子*/
+		.products{
+			width: 310px;
+			height: 224px;
+			border:1px solid #E4E4E4;
+			margin-right:12px;
+			position: relative;
+			
+		}
+		.pro-pic{
+	position: absolute;
+	left: 48px;
+	top: 62px;
+		}
+		.l-sj{
+			position: absolute;
+			left:23px;
+			top:120px;
+				
+			}
+		.r-sj{
+			position: absolute;
+			right:23px;
+			top:120px;
+		}
+		/*中间盒子*/
+		.newslist{
+			height: 224px;
+			width: 373px ;
+			border:1px solid #E4E4E4;
+				
+		}
+		.newslist-list{
+			margin:10px 18px 0 23px;
+		}
+		.newslist-list li{
+			height: 27px;
+			border-bottom:1px dashed #DCDCDC;
+			line-height: 27px;
+
+		}
+		/*右边盒子*/
+		.jishu{
+			height: 224px;
+			width: 268px ;
+			border:1px solid #E4E4E4;
+			float:right;
+
+		}
+		.j-pub{
+			height: 12px;
+			border-left: 3px solid #7AB800;
+			margin-top:10px;
+			margin-left:28px;
+			padding-left:5px;
+		}
+		.jishu p{
+			margin-top:30px;
+			margin-left:28px;
+			line-height: 18px;
+		}
+		.xinwen{
+			text-decoration: none;
+		}
+		.xinwen:hover{
+			color:#F00;
+		}
+    </style>
 <script>
 	function f() {
 		var all = document.getElementById("all");
@@ -278,23 +353,11 @@
 			</ul>
 		</div>
 	</div>
+
+<div class="bookcontent">
+	<p id="description"></p>
+</div>
     
-<div class="book">
-	<div class="bookname">
-		<ul>
-        	<li>新闻:
-            <li><a href="#">计算机学院开展国庆节前实验室安全检查</a>
-            <li><a href="#">广东省农业农村厅领导莅临我院调研</a>
-            <li><a href="#">计算机学院分党校第三期入党积极分子培训</a>
-            <li><a href="#">我院实验中心召开新学期工作会议</a>
-            <li><a href="#">我院举办"互联网+"大学生创新活动</a>
-            <li><a class="x" href="#">更多点击>>&nbsp;&nbsp;&nbsp;</a>
-        </ul>
-  	</div>
-	<div class="bookcontent">
-		<p id="description"></p>
-	</div>
-</div>    
     
     
 <div class="all" id='all'>
@@ -311,6 +374,51 @@
         </ol>
     </div>
 </div>
+
+
+<div class="news clearfix">
+  <div class="products">
+		  <div class="news-pub">
+		    <img src="image/o.jpg" alt="">
+				<span>学院照片</span>
+			</div>
+			<div class="pro-pic">
+				<img src="image/zp.png" alt="" width="215" height="149">
+	  </div>
+			<div class="l-sj">
+			  <img src="image/left.png" alt="">
+			</div>
+			<div class="r-sj">
+			  <img src="image/right.png" alt="">
+			</div>
+		</div>
+        <div class="newslist">
+			<div class="news-pub">
+				<img src="image/o.jpg" alt="">
+				<span>学院新闻</span>
+			</div>
+			<ul class="newslist-list">
+			<li><a class="xinwen" href="#">开展国庆节前实验室安全检查</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019/9/30</li>
+			<li><a class="xinwen" href="#">实验中心召开新学期工作会议</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019/9/05</li>
+			<li><a class="xinwen" href="#">我院学子在第十二届中国大....</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019/8/30</li>
+			<li><a class="xinwen" href="#">广东省农村农业厅领导莅临....</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019/6/11</li>
+			<li><a class="xinwen" href="#">计算机学院分党校第三期入党</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019/4/05</li>
+			<li><a class="xinwen" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;更多>></a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+		</ul>
+		</div>
+        <div class="jishu">
+			<div class="news-pub">
+				<img src="image/o.jpg" alt="">
+				<span>其他</span>
+			</div>
+			<div class="j-pub">学术交流</div>
+			<div class="j-pub">院长邮箱</div>
+			<div class="j-pub">投诉与建议</div>
+			<div class="j-pub">常见问题FAQ</div>
+			<p>广州大学城外环西路100号<br />邮编:510006</p>
+		</div>
+    </div>
+
 
 <div class="foot">
 	<p>广东工业大学</p>
