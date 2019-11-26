@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>分页面一</title>
+
+<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	.back{
+		width:100%;
+		height:100%;
+		position:absolute;
+		background-image:url("image/bizhi.jpg");
+		background-size:100% 100%;
+		z-index:-1;
+	}
+   .top{
+            width: 100%;
+            height: 70px;
+            padding-bottom: 10px;
+			background-color:#4B81CF;
+        }
+	.ul1 {
+            display:inline-block;
+            list-style: none;
+            margin-left: 20px;
+        }
+        #products {
+            color: white;
+            position: relative;
+			text-decoration: none;
+        }
+        #productsmenu {
+            display: none;
+            position: absolute;
+            background-color:#69F;
+            width: 90px;
+        }
+        #productsmenu li {
+            padding-top: 5px;
+			padding-bottom:5px;
+        }
+        #productsmenu li a{
+            color: black;
+            margin-left: 10px;
+			text-decoration: none;
+        }
+		.title{
+            margin-left: 30px;
+            display: inline-block;
+            color: white;
+            font-size: 35px;
+            font-family: "Adobe 宋体 Std L";
+            height: 50px;
+            padding-top: 15px;
+            text-align: center;
+        }
+		.a1{
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+        .a1:hover,#productsmenu li a:hover{color:#F6C}
+		.f{
+			margin-top:200px;
+			margin-left:100px;
+		}
+</style>
+
+</head>
+<body>
+
+<div class="back">
+    <div class="top">
+        <span class="title">广东工业大学计算机学院</span>
+        <a class="a1" href="#">学院首页</a>
+        <a class="a1" href="#">学院新闻</a>
+        <a class="a1" href="#">师资力量</a>
+        <a class="a1" href="#">本科教育</a>
+        <a class="a1" href="#">学生工作</a>
+        <a class="a1" href="#">科学研究</a>
+        <a class="a1" href="#">党建中心</a>
+        <a class="a1" href="#">实验中心</a>
+        <ul class="ul1">
+            <li><a id="products" href="#">[+]发现更多</a>
+                <ul id="productsmenu">
+                    <li><a href="#">校园文化</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="c2.html">分页面二</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="f">
+        <form name="form1">
+        <p><b>昵称:&nbsp;</b><input type="text" size="20" name="name">
+        </p><br />
+        <p><b>手机:&nbsp;</b><input type="text" size="20" name="phone">
+        </p><br />
+        <p><input type="button" value="提交" onclick="display();"></p>
+        </form>
+    </div>
+</div>
+
+<script>
+    function Toggle(e) {
+        if (!document.getElementById) return;
+        if (!e) var e = window.event;
+        whichlink = (e.target) ? e.target.id : e.srcElement.id;
+        obj=document.getElementById(whichlink+"menu");
+        visible=(obj.style.display=="block")
+        key=document.getElementById(whichlink);
+        keyname = key.firstChild.nodeValue.substring(3);
+        if (visible) {
+            obj.style.display="none";
+            key.firstChild.nodeValue = "[+]" + keyname;
+        } else {
+            obj.style.display="block";
+            key.firstChild.nodeValue = "[-]" + keyname;
+        }
+    }
+    document.getElementById("products").onclick=Toggle;
+</script>
+<script language="JavaScript" type="text/javascript">
+function display() {
+    DispWin = window.open('','NewWin', 'toolbar=no,status=no,width=300,height=200')
+    message = "<ul><li><b>昵称: </b>" + document.form1.name.value;
+    message += "<li><b>手机: </b>" + document.form1.phone.value + "</ul>";
+    DispWin.document.write(message);
+}
+</script>
+</body>
+</html>

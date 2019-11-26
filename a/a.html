@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>信息登记</title>
+<style type="text/css">
+	*{
+		padding:0;
+		margin:0;
+		font-size:16px;
+	}
+	.back{
+		width:100%;
+		height:100%;
+		position:absolute;
+	}
+	.div4{
+		height:50%;
+		width:50%;
+		float:left;
+	}
+	.smalldiv{
+		margin:100px 130px;
+	}
+	p span{
+		width:75px; 
+		display:inline-block;
+		text-align:right;                 
+	}
+	p input{
+		width:200px;                                      
+		height:18px;                                 
+		border:1px solid #d4cdba;
+		padding:2px;
+	}
+	.d1,.d2,.d3,.d4{
+		background-image:url("bizhi.jpg");
+		background-size:100% 100%;
+	}
+	.pro{
+		margin-left:50px;
+	}
+	.btn{
+		width:60px; 
+		height:30px;
+		margin-top:10px; 
+		margin-left:80px; 
+		font-size:15px;
+		font-family:"微软雅黑";
+		border:1px solid #d4cdba;
+	}
+</style>
+</head>
+
+<body>
+
+<form action="http://localhost:8081/a/a.php" method="post">
+	<div class='back'>
+    	<div class="div4 d1">
+        	<div class="smalldiv">
+                <p><span>姓名:&nbsp;</span><input type="text" name="name" style="height:20px" required><p><br/>
+                <p><span>年龄:&nbsp;</span><input type="text" name="age" style="height:20px" required>
+            </div>
+        </div>
+        <div class="div4 d2">
+        	<div class="smalldiv">
+                <p><span>兴趣:&nbsp;</span><input type="text" name="like" style="height:20px" required></p><br/>
+                <p class="pro">省:&nbsp;<select id="province" name="province" runat="server" onchange="selectprovince(this);" style="height:25px;width:90px;border:1px solid #d4cdba"></select>
+                市:&nbsp;<select id="city" name="city" runat="server" style="height:25px;width:90px;border:1px solid #d4cdba"></select></p>
+            </div>
+        </div>
+        <div class="div4 d3">
+        	<div class="smalldiv">
+                <p><span>手机:&nbsp;</span><input type="text" name="phone" style="height:20px" required></p><br/>
+                <p><span>邮箱:&nbsp;</span><input type="text" name="email" style="height:20px" required></p>
+            </div>
+        </div>
+        <div class="div4 d4">
+        	<div class="smalldiv">
+                <p><span>留言:&nbsp;</span><textarea name="ly" rows="5" cols="30"></textarea></p>
+                <div>
+                    <input type="submit" value="提交" class='btn'/>
+                    <input type="reset" value="重置" class='btn'/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    var list1 = new Array;
+    var list2 = new Array;
+	list1[list1.length] = "广东省";
+    list1[list1.length] = "江西省";
+    list1[list1.length] = "湖南省";
+	list1[list1.length] = "四川省";
+	list2[list2.length] = new Array("广州市","清远市市","韶关市","河源市","梅州市","潮州市","汕头市","揭阳市","汕尾市","惠州市", "东莞市","深圳市","珠海市","中山市","江门市","佛山市","肇庆市","云浮市","阳江市","茂名市","湛江市");
+    list2[list2.length] = new Array("南昌市","九江市","景德镇市","鹰潭市","新余市","萍乡市","赣州市","上饶市","抚州市","宜春市","吉安市");
+	list2[list2.length] = new Array("长沙市","张家界市","常德市","益阳市","岳阳市","株洲市","湘潭市","衡阳市","郴州市","永州市","邵阳市","怀化市","娄底市","湘西土家族苗族自治州");
+	list2[list2.length] = new Array("成都市","广元市","绵阳市","德阳市","南充市","广安市","遂宁市","内江市","乐山市","自贡市","泸州市","宜宾市","攀枝花市","巴中市","资阳市","眉山市","雅安","阿坝藏族羌族自治州","甘孜藏族自治州","凉山彝族自治州县")
+
+	var ddlProvince = document.getElementById("province");
+    var ddlCity = document.getElementById("city");
+    for(var i =0;i<list1.length; i++) {
+        var option = document.createElement("option");
+        option.appendChild(document.createTextNode(list1[i]));
+        option.value = list1[i];
+        ddlProvince.appendChild(option);
+        //city initialize
+        var firstprovince = list2[0];
+        for (var j = 0; j < firstprovince.length; j++) {
+            var optioncity = document.createElement("option");
+            optioncity.appendChild(document.createTextNode(firstprovince[j]));
+            optioncity.value = firstprovince[j];
+            ddlCity.appendChild(optioncity);
+        }
+    }
+    function indexof(obj,value) {
+        var k=0;
+        for(;k<obj.length;k++) {
+            if(obj[k] == value)
+                return k;
+        }
+        return k;
+    }
+    function selectprovince(obj) {
+        ddlCity.options.length = 0;//clear
+        var index = indexof(list1,obj.value);
+        var list2element = list2[index];
+        for(var i =0;i<list2element.length; i++) {
+            var option = document.createElement("option");
+            option.appendChild(document.createTextNode(list2element[i]));
+            option.value = list2element[i];
+            ddlCity.appendChild(option);
+        }
+    }
+</script>
+</body>
+</html>

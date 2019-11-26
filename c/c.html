@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>index页面</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style:none;
+			border:0;
+		}
+		.header{
+			width:1000px;
+			height:208px;
+			margin:0 auto;
+				
+		}
+		.nav{
+			height:55px;
+			width:1000px;
+			margin:0 auto;
+			background-color:#97C2EE;
+			border-top:1px solid #E1E1E1;
+		}
+		.nav .nav-con{
+			width:1000px;
+			margin:0 auto;
+		}
+ 		.nav li{
+			float:left;
+		}
+		.nav li a{
+			height: 55px;
+			display: inline-block;
+			padding:0 46px;
+			line-height:55px;
+			font-size:15px;
+			color:#FFF;
+			text-decoration: none;
+		}
+		.nav li a:hover,.bookname li a:hover{
+			color:#F6F;
+		}
+		.all{
+            width:1000px;
+            height:300px;
+            margin:0 auto;
+            position:relative;
+        }
+        .screen{
+            width:1000px;
+            height:300px;
+            overflow:hidden;
+            position:relative;
+        }
+        .screen li{ 
+			width:1000px; 
+			height:300px; 
+			overflow:hidden; 
+			float:left;
+		}
+        .screen ul{ 
+			position:absolute; 
+			left:0; 
+			top:0px; 
+			width:6000px;
+		}
+        .all ol{ 
+			position:absolute; 
+			right:10px; 
+			bottom:10px; 
+			line-height:20px; 
+			text-align:center;
+		}
+        .all ol li{ 
+			float:left; 
+			width:20px; 
+			height:20px; 
+			background:#fff; 
+			border:1px solid #ccc; 
+			margin-left:10px; 
+			cursor:pointer;
+		}
+        .all ol li.current{ 
+			background:yellow;
+		}
+		
+		.book {
+            height: 200px;
+			width:1000px;
+			margin:0 auto;
+        }
+        .bookname {
+            height: 200px;
+            width: 400px;
+            float: left;
+            background-color:#E9E9E9;
+        }
+        .bookname li{
+            list-style: none;
+            height: 20px;
+            margin-left: 10px;
+            margin-top: 7px;
+         }
+        .bookname li a {
+            color: black;
+			text-decoration: none;
+        }
+        .bookcontent {
+            height: 200px;
+            width: 600px;
+            margin-left: 400px;
+            background-color:#9CF;
+            color: white;
+            font-size:20px;
+        }
+        .bookcontent p {
+            padding-top:10px;
+			padding-left:5px;
+			padding-right:5px;
+        }
+		.x{
+			float:right;
+		}
+		.foot{
+			width:1000px;
+			height:50px;
+			margin:0 auto;
+			background-color:#000;
+			text-align:center;
+		}
+		.foot p{
+			color:#FF0;
+			padding-top:10px;
+		}
+</style>
+<script>
+	function f() {
+		var all = document.getElementById("all");
+		var screen = all.firstElementChild || all.firstChild;
+		var imgWidth = screen.offsetWidth;
+		var ul = screen.firstElementChild || screen.firstChild;
+     	var ol = screen.children[1];
+      	var div = screen.lastElementChild || screen.lastChild;
+    	var spanArr = div.children;
+      	var ulNewLi = ul.children[0].cloneNode(true);
+    	ul.appendChild(ulNewLi);
+      	for(var i=0;i<ul.children.length-1;i++){
+      		var olNewLi = document.createElement("li");
+         	olNewLi.innerHTML = i+1;
+          	ol.appendChild(olNewLi)
+     	}
+     	var olLiArr = ol.children;
+  		olLiArr[0].className = "current";
+    	for(var i=0;i<olLiArr.length;i++){
+    		olLiArr[i].index = i;
+        	olLiArr[i].onmouseover = function () {
+              	for(var j=0;j<olLiArr.length;j++){
+               		olLiArr[j].className = "";
+             	}
+             	this.className = "current";
+				key = square = this.index;
+             	animate(ul,-this.index*imgWidth);
+     		}
+   		}
+            
+    	var timer = setInterval(autoPlay,2000);
+      	var key = 0;
+      	var square = 0;
+   		function autoPlay(){
+            key++;
+        	if(key>olLiArr.length){
+         		ul.style.left = 0;
+             	key = 1;
+         	}
+       		animate(ul,-key*imgWidth);
+        	square++;
+        	if(square>olLiArr.length-1){
+       			square = 0;
+       		}
+        	for(var i=0;i<olLiArr.length;i++){
+     			olLiArr[i].className = "";
+         	}
+      		olLiArr[square].className = "current";
+    	}
+
+     	all.onmouseover = function () {
+     		div.style.display = "block";
+    		clearInterval(timer);
+     	}
+     	all.onmouseout = function () {
+     		div.style.display = "none";
+    		timer = setInterval(autoPlay,2000);
+  		}
+
+		function animate(ele,target){
+			clearInterval(ele.timer);
+			var speed = target>ele.offsetLeft?10:-10;
+			ele.timer = setInterval(function () {
+				var val = target - ele.offsetLeft;
+				ele.style.left = ele.offsetLeft + speed + "px";
+				if(Math.abs(val)<Math.abs(speed)){
+					ele.style.left = target + "px";
+					clearInterval(ele.timer);
+				}
+			},10)
+		}
+	}
+	
+	function addLoadEvent(fuc){
+		var oldonload=window.onload;
+   		if(typeof oldonload != 'function'){
+        	window.onload=fuc;
+   		}
+		else{
+        	window.onload=function(){
+           		oldonload();
+           	 	fuc();
+        	};
+    	};
+	};
+	
+	addLoadEvent(f);
+	
+	function f1 (){
+		function cleardesc() {
+			d = document.getElementById("description");
+			d.innerHTML = "";
+		}
+		function hover(e) {
+			if (!e) var e = window.event;
+			whichlink = (e.target) ? e.target.id : e.srcElement.id;
+			if (whichlink=="book1") desc = "欢迎来到广东工业大学计算机学院";
+			else if (whichlink=="book2") desc = "计算机学院本科相关专业建设已有30多年的办学历史，涵盖计算机科学与技术、软件工程和信息安全三个学科。现有1个二级学科博士学位授权点，2个一级学科硕士学位授权点，2个工程硕士培养领域授权点；有1个广东省优势重点学科，1个省级名牌专业；拥有完整的从学士到博士的人才培养体系。";
+			else if (whichlink=="book3") desc = "学院下设计算机科学系、软件工程系、网络工程系、网络空间安全系、实验中心和学院办公室等六个机构。学院实施“以优势学科为依托，按专业大类打基础，循发展需求设方向，融创新实践育人才”的培养模式，致力于培养具有严谨科学精神、良好人文素养、宽厚学科基础、突出创新能力的高级技术人才。 ";
+			else if (whichlink=="book4") desc = "学院团委由五大职能部门和二大学生组织构成，各司其职，互帮互助，以统一的工作理念，统一的工作宗旨在不停地努力着。其中，五大职能部门：书记处、宣采部、组织部、外联部、科技部；四大学生组织为：计算机学院红十字会、计算机学院四叶草青年志愿者协会、计算机学院ACM协会、计算机学院信息安全协会。";
+			else if (whichlink=="book5") desc = "计算机学院现有专任教师 106人，其中教授22人、副教授 36人，享受国务院特殊津贴专家4人，科研师资队伍雄厚。学院拥有广东省优势重点学科“计算机科学与技术”，设立高性能计算、信息物理融合系统、软件设计理论与方法、信息对抗与信息系统安全、芯片设计与嵌入式系统、智能媒体信息处理等6个学科重点研究方向，相关学科发展水平处于全省同行前列。";
+			d = document.getElementById("description");
+			d.innerHTML = desc;
+		}
+		b1link = document.getElementById("book1");
+		b1link.onmouseover=hover;
+		b1link.onmouseout=cleardesc;
+		b2link = document.getElementById("book2");
+		b2link.onmouseover=hover;
+		b2link.onmouseout=cleardesc;
+		b3link = document.getElementById("book3");
+		b3link.onmouseover=hover;
+		b3link.onmouseout=cleardesc;
+		b4link = document.getElementById("book4");
+		b4link.onmouseover=hover;
+		b4link.onmouseout=cleardesc;
+		b5link = document.getElementById("book5");
+		b5link.onmouseover=hover;
+		b5link.onmouseout=cleardesc;
+	}
+	
+	addLoadEvent(f1);
+</script>
+</head>
+
+
+
+<body>
+<div class="header">
+    	<img src="image/jisuanji.png" />
+    </div>
+<div class="nav">
+		<div class="nav-con">
+			<ul>
+				<li><a href="#" id="book1">学院首页</a></li>
+				<li><a href="#" id="book2">学院简介</a></li>
+				<li><a href="#" id="book3">本科教育</a></li>
+				<li><a href="#" id="book4">党团建设</a></li>
+                <li><a href="#" id="book5">科学研究</a></li>
+				<li><a href="c1.html">分页面一</a></li>
+			</ul>
+		</div>
+	</div>
+    
+<div class="book">
+	<div class="bookname">
+		<ul>
+        	<li>新闻:
+            <li><a href="#">计算机学院开展国庆节前实验室安全检查</a>
+            <li><a href="#">广东省农业农村厅领导莅临我院调研</a>
+            <li><a href="#">计算机学院分党校第三期入党积极分子培训</a>
+            <li><a href="#">我院实验中心召开新学期工作会议</a>
+            <li><a href="#">我院举办"互联网+"大学生创新活动</a>
+            <li><a class="x" href="#">更多点击>>&nbsp;&nbsp;&nbsp;</a>
+        </ul>
+  	</div>
+	<div class="bookcontent">
+		<p id="description"></p>
+	</div>
+</div>    
+    
+    
+<div class="all" id='all'>
+    <div class="screen" id="screen">
+        <ul id="ul">
+            <li><img src="image/p1.png" /></li>
+            <li><img src="image/p2.png" /></li>
+            <li><img src="image/p3.png" /></li>
+            <li><img src="image/p4.png" /></li>
+            <li><img src="image/p5.png" /></li>
+        </ul>
+        <ol>
+        
+        </ol>
+    </div>
+</div>
+
+<div class="foot">
+	<p>广东工业大学</p>
+</div>
+
+
+    
+    
+   
+   
+    
+</body>
+</html>
